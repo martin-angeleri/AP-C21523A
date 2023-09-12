@@ -1,7 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
+require('dotenv').config();
 
+const dbName = process.env.DB_NAME;
 // Instancia de conexión a la base de datos
-const sequelize = new Sequelize('pruebadb', 'root', '', {
+
+const sequelize = new Sequelize(dbName, 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -10,5 +13,6 @@ const sequelize = new Sequelize('pruebadb', 'root', '', {
 module.exports = {
     sequelize,
     Sequelize,
-    DataTypes
+    DataTypes,
+    dbName
 }
