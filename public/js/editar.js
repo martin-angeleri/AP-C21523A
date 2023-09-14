@@ -11,6 +11,7 @@ const obtenerPublicacion = async (id) => {
 document.addEventListener('DOMContentLoaded', async () => {
     const id = formGuardar.dataset.id
     const publicacion = await obtenerPublicacion(id);
+    console.log('data',publicacion)
 
     const titulo = document.querySelector('#titulo-post')
     const descripcion = document.querySelector('#detalle-post')
@@ -36,6 +37,7 @@ formGuardar.addEventListener('submit', async (e) => {
     const url_imagen = document.querySelector('#url-img').value;
     const fecha = document.querySelector('#fecha').value;
 
+    const id = formGuardar.dataset.id
     // Enviar al servidor
     const response = await fetch(`/publicacion/${id}`, {
         method: 'put',
@@ -46,7 +48,8 @@ formGuardar.addEventListener('submit', async (e) => {
     })
     const data = await response.json();
 
-    alert(data.msg);
+    // alert(data.msg);
+    const bsAlert = new bootstrap.Alert('#myAlert')
     location.href = "/"
 
 })

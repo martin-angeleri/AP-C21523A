@@ -25,7 +25,7 @@ const mostrarPublicaciones = (publicaciones, elementoHtml) => {
                             <p class="text-center pt-2">${publicacion.fecha}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <button type="button" class="btn btn-light">Editar</button>
+                            <a href="./admin/${publicacion.id}" class="btn btn-light">Editar</a>
                             <button type="button" class="btn btn-danger" onclick="setIdBorrar(${publicacion.id})"
                                 data-bs-toggle="modal" data-bs-target="#modal">Eliminar</button> 
                         </div>
@@ -44,7 +44,7 @@ const mostrarPublicaciones = (publicaciones, elementoHtml) => {
           <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar publicación?</h1>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="btnCancelar()">Cancelar</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="btnBorrar()">Si</button>
         </div>
       </div>
@@ -67,14 +67,17 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 let idBorrar;
-let myModal;
 
-function setIdBorrar(id){
-    idBorrar=id;
+function btnCancelar() {
+    idBorrar = null;
 }
+
+function setIdBorrar(id) {
+    idBorrar = id;
+}
+
 async function initPublicaciones() {
     const publicaciones = await obtenerPublicaciones()
-    console.log(publicaciones)
 
 
     // Modificar el DOM para mostrar las publicaciones
@@ -84,6 +87,7 @@ async function initPublicaciones() {
 }
 
 function btnBorrar() {
+    if (idBorrar == null) return;
     borrarPublicacion(idBorrar)
 }
 

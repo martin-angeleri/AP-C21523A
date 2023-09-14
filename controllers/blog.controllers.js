@@ -54,7 +54,7 @@ ctrl.eliminarPublicacion = async (req, res) => {
 
 ctrl.obtenerPublicacion = async (req, res) => {
     const publicacion = await Publicaciones.findByPk(req.params.id)
-    return publicacion;
+    res.json(publicacion)
 }
 
 
