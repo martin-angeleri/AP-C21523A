@@ -12,17 +12,27 @@ const mostrarPublicaciones = (publicaciones, elementoHtml) => {
     publicaciones.forEach(publicacion => {
         secciones += `
             <section class="d-flex gap-2">
-                <div class="card" style="width: 18rem;">
-                <img src="${publicacion.url_imagen}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">${publicacion.titulo}</h5>
-                        <p class="card-text">${publicacion.descripcion}</p>
-                        <p class="card-text">${publicacion.fecha}</p>
+
+            <div class="card mb-3" style="max-width: 640px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="${publicacion.url_imagen}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${publicacion.titulo}</h5>
+                            <p class="card-text">${publicacion.descripcion}</p>      
+                            <p class="text-center pt-2">${publicacion.fecha}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <button type="button" class="btn btn-light">Editar</button>
+                            <button type="button" class="btn btn-danger" onclick="setIdBorrar(${publicacion.id})"
+                                data-bs-toggle="modal" data-bs-target="#modal">Eliminar</button> 
+                        </div>
                     </div>
                 </div>
-                <button onclick="setIdBorrar(${publicacion.id})" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
-                    Eliminar
-                </button>
+            </div>
+
             </section>
         `
     })
